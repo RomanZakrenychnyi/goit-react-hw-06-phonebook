@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import style from './ContactForm.module.css';
 
 export const ContactForm = ({ handleAddContact }) => {
@@ -31,8 +30,4 @@ export const ContactForm = ({ handleAddContact }) => {
       </button>
     </form>
   );
-};
-
-ContactForm.propTypes = {
-  handleAddContact: PropTypes.func,
 };

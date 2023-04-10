@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import style from './ContactList.module.css';
 
 export const ContactList = ({ contacts, handleDeleteBtnClick }) => {
@@ -24,15 +23,4 @@ export const ContactList = ({ contacts, handleDeleteBtnClick }) => {
       })}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contact: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      number: PropTypes.string,
-    })
-  ),
-  handleDeleteBtnClick: PropTypes.func,
 };

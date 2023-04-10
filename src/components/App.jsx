@@ -5,9 +5,12 @@ import { ContactList } from './ContactList/ContactList';
 import { Section } from './Section/Section';
 import { Filter } from './Filter/Filter';
 import { useDispatch, useSelector } from 'react-redux';
+import { add, remove } from 'redux/contact/contactSlice';
+import { handler } from 'redux/filter/filterSlice';
+
 
 export const App = () => {
-  const contacts = useSelector(state => state.contacts[0]);
+  const contacts = useSelector(state => state.contacts);
   const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
@@ -27,17 +30,14 @@ export const App = () => {
       return alert(`${name} is already in contacts.`);
     }
 
-    dispatch({
-      type: 'contacts/add',
-      payload: [...contacts, { name, number, id: nanoid() }],
-    });
+    dispatch(add([...contacts, { name, number, id: nanoid() }]))
 
     event.target.children.name.value = '';
     event.target.children.number.value = '';
   };
 
   const handelFilter = event => {
-    dispatch({ type: 'filter/handler', payload: event.target.value });
+    dispatch(handler(event.target.value))
   };
 
   const filteredContacts = () => {
@@ -47,11 +47,7 @@ export const App = () => {
   };
 
   const handleDeleteBtnClick = id => {
-    dispatch({
-      type: 'contacts/remove',
-      payload: contacts.filter(el => el.id !== id),
-    });
-    // setContacts(prevState => prevState.filter(contact => contact.id !== id));
+    dispatch(remove(contacts.filter(el => el.id !== id)))
   };
 
   return (
